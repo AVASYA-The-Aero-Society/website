@@ -1,8 +1,5 @@
-# website
+How this can be seen locally ? 
 
-## Coming soon page
+just clone the repo and : use "npm i" or "npm install" in your command line.
 
-Implement the coming soon page.
-
-### Assigned to [@Sparsh-06](https://github.com/Sparsh-06)
-
+either way this is the design 
