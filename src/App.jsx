@@ -31,18 +31,17 @@ const App = () => {
 
       {/* Navbar */}
       <nav className="absolute top-0 left-0 right-0 bg-transparent z-50">
-        <div className="container mx-auto px-6 py-3 flex justify-between items-center">
+        <div className="container mx-auto px-6 py-4 flex  items-center justify-center">
           <a href="#" className="text-2xl md:text-3xl font-bold">
-            Avasya
+            AVASYA
           </a>
-          <div className="text-lg md:text-xl font-bold">The Aero Society</div>
         </div>
       </nav>
 
       {/* Main Section */}
       <main className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4 text-center">
         <h1 className="font-bold mb-8 animate-pulse text-3xl sm:text-4xl md:text-5xl lg:text-[clamp(2.5rem, 5vw, 6rem)]">
-          Avasya: The Aero Society | Coming Soon
+          AVASYA Society | Coming Soon
         </h1>
         <span className="mb-12 max-w-3xl font-thin text-sm sm:text-base md:text-lg lg:text-[clamp(1rem, 2vw, 2rem)]">
           We're working hard to bring you something amazing. Stay tuned for our
@@ -62,7 +61,7 @@ const App = () => {
         <div className="mt-12 flex items-center justify-center space-x-4">
           <div className="text-sm md:text-base lg:text-lg">Contact Us At:</div>
           <a
-            href="https://www.instagram.com/aeroclub.iitmbs/"
+            href="https://www.instagram.com/avasya.iitmbs/"
             target="_blank"
             rel="noreferrer"
             className="text-2xl sm:text-3xl hover:text-pink-500 transition-colors duration-300"
@@ -70,7 +69,7 @@ const App = () => {
             <FaInstagram />
           </a>
           <a
-            href="https://www.linkedin.com/company/theaeroclub/"
+            href="https://www.linkedin.com/company/avasyaiitmbs/"
             target="_blank"
             rel="noreferrer"
             className="text-2xl sm:text-3xl hover:text-blue-500 transition-colors duration-300"
