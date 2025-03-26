@@ -16,14 +16,26 @@ animation: loading 1s infinite;
 }
 
 
-/* .footer-text {
-    position: fixed; 
-    bottom: 0; 
-    left: 0;
-    right: 0; 
-    text-align: center; 
-    z-index: 50; 
+@layer utilities{
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+ /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
 }
-   */
+}
+
+
+html {
+  scrollbar-width: none; /* Hides the scrollbar */
+}
+
+/* For Edge */
+::-ms-scrollbar {
+  display: none; /* Hides the scrollbar */
+}
 
   
