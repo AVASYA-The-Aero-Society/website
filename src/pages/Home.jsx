@@ -167,7 +167,7 @@ const Home = () => {
 
         {/* Hero Section */}
         <section className="flex flex-col items-center justify-center h-screen">
-          <h1 className="main-heading text-[24vw] font-bold uppercase tracking-wide text-center leading-none">
+          <h1 className="main-heading text-[22vw] font-bold uppercase tracking-wide text-center leading-none">
             AVASYA
           </h1>
           <p className="subheading text-[1.5rem] w-[555px] font-bold text-white-400 uppercase tracking-wide text-center">
