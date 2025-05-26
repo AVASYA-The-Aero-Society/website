@@ -3,6 +3,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import SplitType from 'split-type';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css'
 import SubHome from "../components/SubHome";
 import Achievement from "../components/Achievement";
 
@@ -18,39 +20,47 @@ const Home = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(()=>{
+    const lenis = new Lenis();
+    function raf(time) {
+
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+      }
+
+    requestAnimationFrame(raf);
+  },[])
+
   useGSAP(() => {
     if (hamburger.current) {
-      // Select all dots in the hamburger menu
       const dots = Array.from(hamburger.current.querySelectorAll('div'));
   
-      // Group dots into rows (3 dots per row)
       const rows = [
-        dots.slice(0, 3), // First row
-        dots.slice(3, 6), // Second row
-        dots.slice(6, 9), // Third row
+        dots.slice(0, 3), 
+        dots.slice(3, 6), 
+        dots.slice(6, 9), 
       ];
   
       // Create a GSAP timeline
       const tl = gsap.timeline({ 
-        repeat: -1, // -1 = infinite loops
-        repeatDelay: 0.5 // Optional pause between loops
+        repeat: -1, 
+        repeatDelay: 0.5 
       });
       
   
-      // Animate each row sequentially
       rows.forEach((row, index) => {
         tl.to(row, {
-          scale: 1.5, // Scale up the dots
+          // scale: 1.5,
+          color: '#FAFBFB',
           duration: 0.5,
-          stagger: 0.1, // Stagger animation for each dot in the row
-          ease: 'power1.out', // Smooth easing for animation
-        }, index * 0.5) // Delay each row animation by its index * 0.5 seconds
+          stagger: 0.1, 
+        }, index * 0.5) 
         .to(row, {
-          scale: 1, // Scale back down to original size
+          scale: 1, 
+          color: '#626262',
           duration: 0.5,
           stagger: 0.1,
-          ease: 'power1.in',
-        }, index * 0.5 + 0.5); // Start scaling down after scaling up finishes
+        }, index * 0.5 + 0.5); 
       });
     }
   }, [hamburger]);
@@ -58,7 +68,6 @@ const Home = () => {
   
   
   useGSAP(() => {
-    // Split text into individual characters
     const mainHeadingSplit = new SplitType('.main-heading', { types: 'chars' });
     const subheadingSplit = new SplitType('.subheading', { types: 'chars' });
     
@@ -66,7 +75,6 @@ const Home = () => {
     const subChars = subheadingSplit.chars;
     
     
-    // Calculate string positions
     const aryabhattaEnd = "ARYABHATTA".length - 1;
     const vymanikAndEnd = "ARYABHATTAVYMANIKAAND".length - 1;
     const antarikShaEnd = "ARYABHATTAVYMANIKAANDANTARIKSHA".length - 1;
@@ -90,7 +98,6 @@ const Home = () => {
       }
     ];
 
-    // Set initial states - only first letter visible
     gsap.set(mainChars.slice(1), { color: '#555', opacity: 0.5 });
     gsap.set(subChars.slice(aryabhattaEnd + 1), { color: '#555', opacity: 0.5 });
     
@@ -99,13 +106,11 @@ const Home = () => {
         trigger: homeAnimation.current,
         start: 'top top',
         end: 'bottom 0%',
-        // markers:true,
         scrub: 3,
         pin: true,
       },
     });
 
-    // Animate each section in parallel (skipping the first 'A' which is already visible)
     mapping.forEach((section, index) => {
       if (index == 0 ) return;
       tl.to(section.mainChars, {
@@ -118,7 +123,7 @@ const Home = () => {
         color: '#fff',
         opacity: 1,
         duration: 0.3,
-      }, index  * 0.3); // Same position parameter for parallel animation
+      }, index  * 0.3); 
     });
   }, { scope: homeAnimation });
   
@@ -149,28 +154,28 @@ const Home = () => {
 
     <div className="min-h-screen bg-[#161616] text-white">
       {/* Header */}
-      <div ref={homeAnimation}>
-        <header className="flex justify-between items-center p-2 sticky ">
+      <header className="flex justify-between items-center px-2 sticky top-0 z-22  backdrop-blur-2xl py-6">
 
-          <div ref={hamburger} className="w-6 h-6 hover:cursor-pointer">
-            <div className="grid grid-cols-3 gap-0.5">
-              {[...Array(9)].map((_, i) => (
-                <div key={i} className="w-1 h-1 bg-white"></div>
-              ))}
-            </div>
+        <div ref={hamburger} className="w-6 h-6 hover:cursor-pointer m-6">
+          <div className="grid grid-cols-3 gap-0.5">
+            {[...Array(9)].map((_, i) => (
+              <div key={i} className="w-2 h-2 border rounded-[0.5px] bg-[#2D2D2D]"></div>
+            ))}
           </div>
-          <img src="./favicon.svg" alt="" width={205} />
-          <button className="text-sm border border-white px-4 py-2 hover:bg-white hover:text-black hover:cursor-pointer transition">
-            Join Research Team
-          </button>
-        </header>
+        </div>
+        <img src="./favicon.svg" alt="" width={205}  />
+        <button className="text-sm border bg-[#2D2D2D] border-[#2D2D2D] rounded-sm px-4 py-2 hover:bg-white hover:text-black hover:cursor-pointer transition uppercase font-medium">
+          Join Research Team
+        </button>
+      </header>
+      <div ref={homeAnimation}>
 
         {/* Hero Section */}
-        <section className="flex flex-col items-center justify-center h-screen">
-          <h1 className="main-heading text-[22vw] font-bold uppercase tracking-wide text-center leading-none">
+        <section className="flex flex-col items-center justify-center h-screen overflow-hidden">
+          <h1 className="main-heading text-[22vw] uppercase tracking-wide text-center leading-none text-nowrap ">
             AVASYA
           </h1>
-          <p className="subheading text-[1.5rem] w-[555px] font-bold text-white-400 uppercase tracking-wide text-center">
+          <p className="subheading text-[1.5rem] w-[555px] font-bold text-white-400 uppercase tracking-wide text-center ">
             Aryabhatta Vymanika and Antariksha Shastriya Society
           </p>
         </section>

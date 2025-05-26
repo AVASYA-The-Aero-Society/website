@@ -81,9 +81,6 @@ const SubHome = () => {
         <div className="col-span-2 relative md:col-span-1 lg:col-span-2 h-full flex justify-center md:justify-start items-start md:place-items-center">
           <div className="relative rounded-xl overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10 flex items-end p-4">
-              <div className="text-white text-lg">{/* The text you want at the bottom */}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus numquam, sapiente harum rerum, repellat sed nihil reiciendis inventore vitae quis sit incidunt ad blanditiis similique?
-              </div>
             </div>
             <img 
               src={imageSrc} 
