@@ -137,7 +137,7 @@ const Home = () => {
           <div className="loading flex flex-col items-center">
             <img src="/favicon.svg" alt="avasya-logo" />
             <div className="mt-12 w-[257px] ">
-              <div className="text-white flex justify-center font-(family-name:BebasNeue) font-[600] tracking-[1.68px]">
+              <div className="text-white flex justify-center font-[600] tracking-[1.68px]">
                 LOADING
               </div>
               <div className="loading-bar mt-1"></div>

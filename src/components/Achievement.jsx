@@ -1,8 +1,37 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
 
 const Achievement = () => {
 
-    const [index, setIndex] = useState(0)
+    const [index, setIndex] = useState(0);
+    const cursorRef = useRef(null);
+    const achievementRef = useRef(null);
+
+    
+
+    const cursorMove = (e) => {
+      const rect = achievementRef.current.getBoundingClientRect();
+      const cursor = cursorRef.current;
+      const cursorWidth = cursor.offsetWidth;
+      const cursorHeight = cursor.offsetHeight;
+
+      gsap.to(cursor, {
+        scale: 1.5,
+        x: e.clientX - rect.left - cursorWidth / 2 - 760,
+        y: e.clientY - rect.top - cursorHeight / 2,
+        opacity: 1,
+        duration: 0.5,
+        // ease: 'power2.out'
+      });
+};
+
+    const cursorLeave = (e) =>{
+      gsap.to(cursorRef.current,{
+        opacity:0
+      })
+      // cursorRef.current.style.opacity = 0;
+
+    }
 
     const achievements = [
         {
@@ -41,14 +70,15 @@ const Achievement = () => {
       };
     
   return (
-    <div className='flex justify-center items-center flex-col pb-4'>
-        <div className='font-bold text-gray-600 p-7 text-2xl'>Achievement</div>
+    <div ref={achievementRef} id='achievement' className='flex justify-center items-center flex-col pb-4' onMouseMove={cursorMove} onMouseLeave={cursorLeave}>
+      <div ref={cursorRef} className='rounded-2xl w-5 h-5 bg-white/65 opacity-0 pointer-events-none ' id='circularCurosr'></div>
+        <div id='achievementSection' className='font-bold text-gray-600 p-7 text-2xl uppercase' >Achievements</div>
         <div className='grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1'>
             <div className='col-span-2'>
                 <img src={achievements[index].image} alt="achievement" className='px-3' />
                 <div className='px-3 flex justify-between'> 
                     <div className='number font-bold text-4xl'>
-                        {index + 1}/<span className="text-gray-600">{achievements.length}</span>
+                        0{index + 1}/<span className="text-gray-600">0{achievements.length}</span>
                     </div>
                     <div className='flex gap-2'>
                         <div className='text-sm font-bold bg-[#2D2D2D] border border-[#2D2D2D] mt-1.5 py-2 px-1.5 hover:bg-white hover:text-black hover:cursor-pointer transition' onClick={goToPrevious}>Back</div>

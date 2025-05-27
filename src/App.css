@@ -22,7 +22,12 @@ animation: loading 1s infinite;
   font-style: italic;
 }
 
-
+.subHomeText{
+  font-family: Archivo;
+  font-size: 24px;
+  line-height: 1;
+  text-align: left;
+}
 
 
 @layer utilities{
