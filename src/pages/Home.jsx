@@ -14,6 +14,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const homeAnimation = useRef(null)
   const hamburger = useRef(null)
+  const [activeRow, setActiveRow] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
@@ -31,39 +32,12 @@ const Home = () => {
     requestAnimationFrame(raf);
   },[])
 
-  useGSAP(() => {
-    if (hamburger.current) {
-      const dots = Array.from(hamburger.current.querySelectorAll('div'));
-  
-      const rows = [
-        dots.slice(0, 3), 
-        dots.slice(3, 6), 
-        dots.slice(6, 9), 
-      ];
-  
-      // Create a GSAP timeline
-      const tl = gsap.timeline({ 
-        repeat: -1, 
-        repeatDelay: 0.5 
-      });
-      
-  
-      rows.forEach((row, index) => {
-        tl.to(row, {
-          // scale: 1.5,
-          color: '#FAFBFB',
-          duration: 0.5,
-          stagger: 0.1, 
-        }, index * 0.5) 
-        .to(row, {
-          scale: 1, 
-          color: '#626262',
-          duration: 0.5,
-          stagger: 0.1,
-        }, index * 0.5 + 0.5); 
-      });
-    }
-  }, [hamburger]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveRow((prev) => (prev + 1) % 3);
+    }, 700); // Adjust speed as desired
+    return () => clearInterval(interval);
+  }, []);
   
   
   
@@ -156,11 +130,22 @@ const Home = () => {
       {/* Header */}
       <header className="flex justify-between items-center px-2 sticky top-0 z-22  backdrop-blur-2xl py-6">
 
-        <div ref={hamburger} className="w-6 h-6 hover:cursor-pointer m-6">
+        <div ref={hamburger} className="w-10 h-10 hover:cursor-pointer m-6">
           <div className="grid grid-cols-3 gap-0.5">
-            {[...Array(9)].map((_, i) => (
-              <div key={i} className="w-2 h-2 border rounded-[0.5px] bg-[#2D2D2D]"></div>
-            ))}
+            {[...Array(9)].map((_, i) => {
+              const row = Math.floor(i / 3);
+              return (
+                <div
+                  key={i}
+                  className="w-3 h-3 border rounded-[0.5px]"
+                  style={{
+                    background: row === activeRow ? "#FAFBFB" : "#2D2D2D",
+                    border: row === activeRow ? "#FAFBFB" : "#2D2D2D",
+                    transition: "background 0.3s"
+                  }}
+                ></div>
+              );
+            })}
           </div>
         </div>
         <img src="./favicon.svg" alt="" width={205}  />
