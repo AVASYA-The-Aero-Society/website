@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+:root {
+  --background: #171717;
+  --foreground: #171717;
+  max-width: 1920px;
+  max-height: 1080px;
+}
+
+@font-face {
+  font-family: 'otameal';
+  src: url('../assets/Oatmeal_Sans.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@theme {
+  --color-cgray: #626262;
+  --color-join: #2D2D2D;
+  --color-cwhite: #FAFBFB;
+  --animate-loading: loading 5s ease-in-out forwards;
+  
+  @keyframes loading {
+    0% {
+      width: 0;
+      background-color: var(--color-cwhite);
+    }
+    100% {
+      width: 100%;
+      background-color: var(--color-cwhite);
+    }
+
+  }
+  --font-otameal: "otameal", sans-serif;
+  --font-archivo: "Archivo", sans-serif;
+  --font-inter: "Inter", sans-serif;
+}
+
+@layer components{
+  .navbar{
+    @apply  h-[120px] flex justify-center items-center gap-[689px] shrink-0 backdrop-blur-[47.5px];
+  }
+
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #171717;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.error-page {
+  font-size: clamp(100px, 22.5vw, 432px);
+}
